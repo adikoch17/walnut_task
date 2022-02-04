@@ -12,8 +12,7 @@ function App() {
 
   const calculateAge = () =>{
     setAge("")
-    setError("")
-    let a = 0;
+    let a = -1;
     let d = new Date(Date.now())
     let day_today = d.getDate()
     let month_today = d.getMonth()+1
@@ -22,7 +21,7 @@ function App() {
     if(parseInt(year)>year_today){
       setError("Year cannot be greater than the current one")
     }
-    else if(parseInt(day)<=0 || parseInt(month)<=0 || parseInt(year)<=0){
+    else if((parseInt(day)<=0 && parseInt(day)>31) || (parseInt(month)<=0 && parseInt(month)>12) || (parseInt(year)<=0)){
       setError("Invalid input")
     }
     else{
@@ -49,18 +48,23 @@ function App() {
             }
           } 
         }
-      }  
+      }
     }
-    if(error===""){
-      setAge(`Age: ${a} `)
+    if(a>=0){
+      console.log("pass")
+      setAge(`Age: ${a}`)
     }
     else{
+      console.log("fail")
       setAge("")
-    }
+    }  
   }
 
+
 function onClickGetAge(){
+    setError("")
     calculateAge()
+    console.log("click")
   }
 
   return (
